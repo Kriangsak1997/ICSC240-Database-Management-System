@@ -1,0 +1,200 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{scribe}
+\usepackage{listings}
+\usepackage{algorithm}
+\Scribe{Kriangsak Thuiprakhon}
+\Lecturer{Kanat Tangwongsan}
+\setlength{\headheight}{35pt}
+\LectureNumber{8}
+\usepackage{tikz}
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+\LectureDate{DATE}
+\LectureTitle{Application of Scan}
+\lstset{style=mystyle}
+
+\usepackage[margin=1in]{geometry}
+
+\newcommand{\question}[2] {\vspace{.25in} \hrule\vspace{0.5em}
+\noindent{\bf #1: #2} \vspace{0.5em}
+\hrule \vspace{.10in}}
+\renewcommand{\part}[1] {\vspace{.10in} {\bf (#1)}}
+
+\newcommand{\myname}{Kriangsak Thuiprakhon: 6080163}
+\newcommand{\myemail}{kriangsak.thi@student.mahidol.edu}
+\newcommand{\myhwnum}{4}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+ 
+\pagestyle{fancyplain}
+\lhead{\fancyplain{}{\textbf{HW\myhwnum}}}      % Note the different brackets!
+\rhead{\fancyplain{}{\myname\\ \myemail}}
+\chead{\fancyplain{}{ICMA200 }}
+
+\begin{document}
+
+\medskip                        % Skip a "medium" amount of space
+                                % (latex determines what medium is)
+                                % Also try: \bigskip, \littleskip
+
+\thispagestyle{plain}
+\begin{center}                  % Center the following lines
+{\Large ICMA200: Assignment \myhwnum} \\
+\myname \\
+\myemail \\
+\end{center}
+
+Database Systems (II.2020) Final Exam
+• READ THE INSTRUCTION CAREFULLY BEFORE YOU START.
+• This is an open-book exam. Though please work on the exam individually.
+• This exam assumes you have 4 hours (e.g., 2 lectures), and is counted towards 30% of your final grade. (You are allow to spend more than 4 hours to work on it, but please submit your answer on time.)
+• If you need to make any assumption, please feel free to do so and clarify the assumption in your answer. Though you may not get a full credit if you overly simplify the problem. :(
+• For any multiple-choice questions, choices are given in bolded texts; you may choose at most one answer. You get the specified points for that question if your choice is correct. If you are not sure and choose to not answering any question, you will award 25% the specified points for each question you omit.
+• For any open-response question, write your final answer in the space/box provided. You may also show your work in the provided space for partial credit. Additional attachment for your drawing(s) or figure(s) is acceptable.
+• I DON’T KNOW policy. For any open-response question/box (excluding extra credits), you have an option to write (a big) “I don’t know” to earn exactly 25% of the specified points, but none of your partial work will be graded on that question.
+• Again, NO “I don’t know” policy on extra-credit questions! :(
+• Please write your answers legibly. Points will not be given unless the answer is readable!
+• Write your name in the provided box that you have acknowledged and will follow the above instructions when taking this exam.
+Name
+MC-Q OP-R OP-D OP-S OP-T OP-Q TOTAL extra
+/35 /10 /10 /10 /25 /10 /100 /10
+Good luck & Have fun :)
+     1
+
+MUIC II/2020 Final Exam ICCS240
+Multiple-Choices Questions - 35pt
+No partial credits given, so no need to show your works in this section.
+1. [1pt] TRUE / FALSE : For any relation R(A1, A2, ...), the first listed attribute A1 is always one of the keys of the relation R.
+2. [1pt] TRUE / FALSE : Given non-empty relations R(A,B) and S(C,D), then R ◃▹ S = R×S.
+3. [1pt] TRUE / FALSE : In set semantics, for any two relations R and S, the algebraic law σC(R ∪ S) = σC(R) ∪ σC(S) holds.
+4. [1pt] TRUE / FALSE : In mulit-set or bag semantics, for any two relations R and S, the algebraic law σC (R ∪ S) = σC (R) ∪ σC (S) holds.
+5. [2pt] TRUE / FALSE : Given relations R(A, B) and S(A, B), πA(R ∩ S) = πA(R) ∩ πA(S).
+6. [2pt] TRUE / FALSE : The “one-to-one” property of a relationship in E/R diagram is an
+example of a database constraint.
+7. [1pt] TRUE / FALSE : In SQL, we can declare multiple different sets of attributes as
+UNIQUE in a single relation R.
+8. [1pt] TRUE / FALSE : In SQL, we can set more than one primary keys for a single table.
+9. [1pt] TRUE / FALSE : A primary key is also a superkey.
+10. [1pt] TRUE / FALSE : Every candidate key is also a superkey.
+11. [2pt] TRUE / FALSE : If a multi-valued dependency A1A2...An 􏰀 B1B2...Bn holds, then
+a functional dependency A1A2...An → B1B2...Bn holds
+12. [2pt] TRUE / FALSE : There exists a relation that is in BCNF, but not in 3NF.
+13. [2pt] TRUE / FALSE : For any relation R, it is always possible to find a dependency- preserving lossless-join decomposition (of R) which is in 3NF.
+14. [2pt] TRUE / FALSE : Extensible hash tables may sometimes have overflow blocks.
+15. [2pt] TRUE / FALSE : An index can be created on multiple attributes in a single relation.
+16. [2pt] TRUE / FALSE : A relation can have at most one unclustered index created on it.
+17. [2pt] TRUE / FALSE : For a given SQL query, query optimizers may have to consider multiple logical plans and physical plans.
+18. [2pt] TRUE / FALSE : A non-serializable schedule can violate the isolation property in ACID principle.
+19. [2pt] TRUE / FALSE : Every serializable schedule is conflict serialzable.
+20. [5pt] TRUE / FALSE : The following schedule of transactions T1, T2 and T3 is recoverable. R2(B); W2(B); R1(C); W1(C); R1(A); W1(A); COMMIT(T1); R2(C); W2(C); COMMIT(T2); R3(A); R3(B); W3(A); W3(B); COMMIT(T3);
+ 2
+
+MUIC II/2020 Final Exam ICCS240
+SQL and Relational Algebra - 10pt
+1. [4pt] Given a database schemata: Product(pid, price), Order(oid, customer, pid, quantity). Write in SQL to find a list all products along with its total ordered quantities in descending
+order of the amount.
+     2. [3pt] Write the following relational algebra expression in SQL, for relation R(a,b,c) and S(a,b,d): πa,b(σa<0(R))−πa,b(S).
+    3. [3pt] Write the following SQL query in relational algebra, for relation R(a,b) and S(c,d): SELECT a, d FROM R, S WHERE R.a > 240 and R.b = S.c;
+    3
+
+MUIC II/2020 Final Exam ICCS240
+Database Design Theory - 10pt
+1. [4pt] Given relation R(A, B, C, D, E, G) and the set of functional dependencies F: A→CD, AB→DE, AD→G, BD→E, D→EG, E→G
+Find a minimal basis of F.
+     2. [4pt] Assume a relation R(A,B) has no NULL values. Write a SQL query that can check whether a functional dependency A → B holds in R. Briefly explain why your query works.
+    3. [2pt] Consider a relational R(A,B,C) having a functional dependency A → B. If C is a candidate key for R, determine if R could be in BCNF (YES/NO). If YES, state the condition when/where R could be in BCNF. Otherwise, explain why R cannot be in BCNF.
+    4
+
+MUIC II/2020 Final Exam ICCS240
+Storage and Indexing - 10pt
+1. [3pt] Consider a relation R(A,B) stored as a randomly ordered file. The only index on R is an unclustered index on A. Suppose you want to retrieve all records where A > 0. Explain whether using the index is always the best alternatives. What about just simply performing file scanning instead of using the index?
+     2. [7pt] Consider an application that required user to register their names. Assume at this moment the following users have registered their name in the following order (their age is in the parentheses):
+alice(10), bob(20), carol(19), david(30), eve(15), frank(60), alex(10), chris(31), diana(99). It is expected to have many more users in the future. The application tends to retrieve some
+(sub) lists of users ordered by names, and sometimes ordered by their ages.
+What index(es) should be built to help facilitate or improve the application query perfor- mance? Show how all of your proposed index(es) looks like. You must also specify any hash, comparison function or any related function you need to build your index(es).
+    ... more space on next page ...
+5
+
+MUIC II/2020 Final Exam ICCS240
+     6
+
+MUIC II/2020 Final Exam ICCS240
+Transaction and Concurrency Control - 25pt
+1. [4pt] Consider the actions R(X); W(X) taken by transaction T1 on database object X. Give an example of another transaction T2 that, if run concurrently to T1 without some form of concurrency control, could interfere with T 1. Briefly explain why.
+     2. [3pt] Explain what it means for a schedule to avoid-cascading-aborts.
+    7
+
+MUIC II/2020 Final Exam ICCS240
+3. [10pt] Given a schedule:
+                R2(C); R1(B); R1(A); W1(B); R3(A); W3(B); R3(C); W2(B)
+Please answer the following questions.
+Draw a precedence graph of the above schedule. (7pt)
+     Is the schedule conflict serializable? If so, write YES and show the order in which the transaction would have to run in the equivalent serial schedule. Otherwise, write NO. (3pt)
+    8
+
+MUIC II/2020 Final Exam ICCS240
+4. [4pt] Assume that transactions can request locks only at a time when they needs them. Is deadlock possible for these three transactions executed under strict two-phase locking (YES/NO)? If YES, give a possible schedule that causes the deadlock or some justification. T1: R(A), W(A), W(B), COMMIT
+     T2:  R(A), W(A), W(B), COMMIT
+     T3:  R(A), W(A), W(B), COMMIT
+     5. [4pt] Assume that transactions can request locks only at a time when they needs them. Is deadlock possible for these three transactions executed under strict two-phase locking (YES/NO)? If YES, give a possible schedule that causes the deadlock or some justification. T1: R(A), W(B), COMMIT
+  T2:  R(C), W(A), COMMIT
+  T3:  W(C), R(B), R(A), COMMIT
+    9
+
+MUIC II/2020 Final Exam ICCS240
+Query Execution and Optimization - 10pt (+10 pt extra)
+1. [4pt] Write two possible logical plans for the following query over relations R(a, b) and S(a, c): SELECT a FROM R, S WHERE R.a = S.a AND S.c>100;
+     10
+
+MUIC II/2020 Final Exam ICCS240
+2. [3pt] Assume that duplicate elimination for a projection can be done during sorting, hence ignoring its cost. In term of costs from tuples examination, describe a situation where we would like to perform projection before selection, e.g., σ(π(R)), instead of performing selection and then projection, e.g., π(σ(R)).
+     3. [3pt + 8pt extra] Assume tables R and S with the following statistics:
+ R(a, b):
+T(R) = 2000 B(R) = 10
+V (R, a) = 10 V(R,b)=500
+S(a, c): T(R) = 100 B(S) = 80
+V (S, a) = 20 V(S,c)=80
+  where T(x) denotes the number of tuples in relation x, B(x) denotes the number of blocks holding relations x, and V (x, y) denotes the number of distinct values for attribute y of x.
+What is the expected number of tuples produced by scan over R? (1pt)
+What is the expected number of tuples produced by σa=0(R)? (1pt)
+What is the total estimated cost of performing two scans over R and then S? (1pt)
+            11
+
+MUIC II/2020 Final Exam ICCS240
+If no index is built or used, what is the best estimated cost of σa=0(R)? (1pt extra)
+     Assume no index is built or used and R is already sorted and stored on disk (and having the above statistics). What is the cost estimation of R ◃▹ S using a sort-based join? (3pt extra)
+    For what minimal value of M (number of blocks fit in main memory) would we need to compute for the result of R ◃▹ S using a block-based nested-loop join algorithm with no more than than 90 I/Os? (4pt extra)
+    12
+
+MUIC II/2020 Final Exam ICCS240
+4. [2pt extra] How many logical plans are there for a 3-way join: R ◃▹ S ◃▹ T ?
+Hint: R ◃▹ (S ◃▹ T), R ◃▹ (T ◃▹ S), (R ◃▹ S) ◃▹ T, ... Can you quickly enumerate all of these?
+      Please submit your project report by 29th (or early 30th) if you haven’t done so. Thank you! Enjoy your holidays/summer break and stay safe. :)
+... There is a very optional extra credit on the next page. ...
+To be fair, after you are assigned a letter grade for this course, any extra credit scores will then be added to your total to adjust your letter grade at the last step. Hence, there is no disadvantage if you do not want to or have time to do any extra credit problems.
+13
+
+MUIC II/2020 Final Exam ICCS240
+*Optional* Extra Credits towards Midterm I/II Please choose at most 4 out of the following 7 questions.
+Each question may worth different score as indicated in []. Please note that this is not part of the 4 hours of the final exam. However, if you choose to take advantage of this extra problems, you must submit your answer to this section along with your answers to the final exam.
+Midterm I:
+1. Explain the difference between Natural Join and Inner Join? [2pt]
+2. Assume your SQL does not support UNION ALL, INTERSECT, INTERSECT ALL and EXCEPT operations. Also, UNION operator always eliminates any duplicate results.
+Given two existing tables R(A : int) and S(A : int), implement a variation of UNION between R and S (R ⊔ S) that returns a new table T (A : int) such that, for any integer a, if a tuple (a) ∈ R or (a) ∈ S, then (a) ∈ T and count((a), T ) = count((a), R) + count((a), S) where count((x), Y ) denote the number of tuple (x) in table Y . [4pt]
+3. Similar to question 2, can we do so if we change the above definition such that
+count((a), T ) = max{count((a), R), count((a), S)}? Show your implementation if any, or justification of why we cannot. [4pt]
+Midterm II:
+1. Give an example of when you would want your relational table to be at least in 1NF. Justify
+your answer. [2pt]
+2. Give an example of when you would want your relational table to be in BCNF instead of in 1NF or 2NF or 3NF. Justify your answer. [3pt]
+3. Say you have a dataset D consisting of many natural numbers. Let H1 be a hash indexing over D using extendable hash, and data in D is inserted to H1 in ascending order. Let H2 be a hash indexing over D using extendable hash, and data in D is inserted to H2 in random order. Is there any difference between the final indexes of H1 and H2. Explain your answer. [4pt]
+4. Given two B+tress T1 and T2 of order 2 where every key in in T2 is smaller than T1, suggest a very efficient way to merge T1 and T2 into a single B+tree? Justify your solution. [7pt]
+ 14
+\end{document}
